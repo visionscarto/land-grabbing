@@ -1,0 +1,94 @@
+<style>
+.off {display: none}
+img { max-width: 100%; height: auto; }
+img {
+	position: absolute; top:0;
+}
+img#fond {
+	position: absolute; top:0;
+}
+
+.bounding {
+min-width:420px;
+margin-left: 20%;
+position: relative;
+}
+
+.legend {
+width: 15%;
+min-width: 100px;
+position: relative;
+max-width: 200px;
+text-align:left;
+}
+
+.illus {
+width: 90%;
+padding-left: 1rem;
+max-width: 1401px
+}
+
+.im img { display: none }
+</style>
+
+<div class="illus">
+<div class="legend">
+<img src="liste-pays.jpg" />
+</div>
+<div class="bounding">
+<div>
+<img id="fond" src="fond-carte.jpg" />
+</div>
+<div class="im">
+<img src="01-Allemagne.png" />
+<img src="02-Danemark.png" />
+<img src="03-Belgique.png" />
+<img src="04-Autriche.png" />
+<img src="05-Luxembourg.png" />
+<img src="06-Suisse.png" />
+<img src="07-Espagne.png" />
+<img src="08-Portugal.png" />
+<img src="09-Finlande.png" />
+<img src="10-France.png" />
+<img src="11-Suede.png" />
+<img src="12-Norvege.png" />
+<img src="13-Italie.png" />
+<img src="14-Pays-Bas.png" />
+<img src="15-Royaume-Uni.png" />
+</div>
+</div>
+</div>
+
+<script src="jquery-1.6.2.min.js"></script>
+<script>
+var i = 0;
+
+function show_country(i) {
+	$('.im img:visible').fadeOut();
+	$('.im img:nth-child('+i+')').fadeIn('slow');
+}
+
+$('.legend').click(function(e){
+	var l = ((e.pageY - ($('.legend img').offset()).top) / $('.legend img').height());
+	i = 1+Math.floor(l*15);
+	show_country(i);
+});
+
+// naviguer au clavier
+$(document).keydown(function(e) {
+	if (e.keyCode == 37) // left
+	{
+		i = 1 + (i-2) % 15; show_country(i);
+	}
+	if (e.keyCode == 39) // right
+	{
+		i = 1 + i % 15; show_country(i);
+	}
+});
+
+/*
+setInterval(function() {
+	i = 1 + i % 15; show_country(i);
+}, 1000);
+*/
+</script>
